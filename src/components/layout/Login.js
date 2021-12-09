@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import Constants from "../../constants/Constants";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -54,12 +55,14 @@ export default function Login() {
 
   const navigate = useNavigate();
 
+  console.log(Constants.ADMIN_SERVER_URL);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     axios
-      .post("http://localhost:5001/api/auth/admin", {
+      .post(`${Constants.ADMIN_SERVER_URL}/api/auth/admin`, {
         email: data.get("email"),
         password: data.get("password"),
       })

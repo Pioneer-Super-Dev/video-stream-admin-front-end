@@ -4,6 +4,7 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Input from "@mui/material/Input";
 import axios from "axios";
+import Constants from "../../constants/Constants";
 
 const ariaLabel = { "aria-label": "description" };
 
@@ -14,7 +15,7 @@ export default function Menu() {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:5001/api/setting/menu")
+      .get(`${Constants.ADMIN_SERVER_URL}/api/setting/menu`)
       .then((response) => {
         setGender(response.data.genders);
       })
@@ -28,7 +29,9 @@ export default function Menu() {
       setGender(tempGender);
       setFlag(!flag);
       axios
-        .post("http://localhost:5001/api/setting/menu", { gender: gender })
+        .post(`${Constants.ADMIN_SERVER_URL}/api/setting/menu`, {
+          gender: gender,
+        })
         .then((response) => {
           console.log(response.data);
         })
@@ -50,7 +53,7 @@ export default function Menu() {
     setFlag(!flag);
 
     axios
-      .delete(`http://localhost:5001/api/setting/menu/${gen}`)
+      .delete(`${Constants.ADMIN_SERVER_URL}/api/setting/menu/${gen}`)
       .then((response) => {
         console.log(response.data);
       })

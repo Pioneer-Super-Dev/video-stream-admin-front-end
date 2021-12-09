@@ -16,6 +16,7 @@ import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Constants from "../../constants/Constants";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -67,7 +68,7 @@ export default function SignUp() {
 
     if (password == password2) {
       axios
-        .post("http://localhost:5001/api/admin", {
+        .post(`${Constants.ADMIN_SERVER_URL}/api/admin`, {
           email: email,
           password: password,
         })

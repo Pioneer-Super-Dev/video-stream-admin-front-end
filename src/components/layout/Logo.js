@@ -4,6 +4,7 @@ import { PhotoCamera } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import axios from "axios";
+import Constants from "../../constants/Constants";
 
 const ImageThumb = ({ image }) => {
   console.log(image);
@@ -19,7 +20,7 @@ const ImageThumb = ({ image }) => {
   } else
     return (
       <Avatar
-        src={`http://localhost:5000/logo/${image}`}
+        src={`${Constants.USER_SERVER_URL}/logo/${image}`}
         sx={{ width: "auto", height: 250, border: 1, borderColor: "primary" }}
         variant="rounded"
       />
@@ -35,7 +36,7 @@ export default function Logo() {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:5001/api/setting/logo")
+      .get(`${Constants.ADMIN_SERVER_URL}/api/setting/logo`)
       .then((response) => {
         setFile(response.data.logo);
       })
@@ -54,9 +55,9 @@ export default function Logo() {
     data.append("logo", event.target.files[0]);
 
     axios
-      .post("http://localhost:5000/api/upload/logo", data)
+      .post(`${Constants.USER_SERVER_URL}/api/upload/logo`, data)
       .then((response) => {
-        axios.post("http://localhost:5001/api/setting/logo", {
+        axios.post(`${Constants.ADMIN_SERVER_URL}/api/setting/logo`, {
           logo: response.data,
         });
       })
@@ -74,7 +75,7 @@ export default function Logo() {
             <ImageThumb image={file} />
           ) : (
             <Avatar
-              src="http://localhost:5000/logo/logo_blue.png"
+              src={`${Constants.USER_SERVER_URL}/logo/logo_blue.png`}
               sx={{
                 width: "auto",
                 height: 250,
