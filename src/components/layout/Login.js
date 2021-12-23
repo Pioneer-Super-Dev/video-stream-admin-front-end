@@ -74,7 +74,7 @@ export default function Login() {
       })
       .catch((err) => {
         setSeverity("error");
-        setMessage("Login Failed");
+        setMessage("Login OKaFailed");
         setOpen(true);
       });
   };

@@ -7,7 +7,6 @@ import axios from "axios";
 import Constants from "../../constants/Constants";
 
 const ImageThumb = ({ image }) => {
-  console.log(image);
   if (image.name) {
     return (
       <Avatar

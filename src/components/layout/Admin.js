@@ -17,6 +17,7 @@ import WidgetsIcon from "@mui/icons-material/Widgets";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import LogoDevIcon from "@mui/icons-material/LogoDev";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
+import FingerprintIcon from "@mui/icons-material/Fingerprint";
 import Logo from "./Logo";
 import Menu from "./Menu";
 import AdminSetting from "./AdminSetting";
@@ -26,12 +27,14 @@ import Payment from "./Payment";
 import Theme from "./Theme";
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Verification from "./Verification";
 
 const drawerWidth = 240;
 
 export default function Admin() {
   var [menuShow, setMenuShow] = React.useState([
     "flex",
+    "none",
     "none",
     "none",
     "none",
@@ -47,27 +50,103 @@ export default function Admin() {
   };
 
   const handleLogoChange = () => {
-    setMenuShow(["flex", "none", "none", "none", "none", "none", "none"]);
+    setMenuShow([
+      "flex",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+    ]);
   };
   const handleMenuChange = () => {
-    setMenuShow(["none", "flex", "none", "none", "none", "none", "none"]);
+    setMenuShow([
+      "none",
+      "flex",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+    ]);
   };
   const handleThemeChange = () => {
-    setMenuShow(["none", "none", "flex", "none", "none", "none", "none"]);
+    setMenuShow([
+      "none",
+      "none",
+      "flex",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+    ]);
   };
   const handleLanguageChange = () => {
-    setMenuShow(["none", "none", "none", "flex", "none", "none", "none"]);
+    setMenuShow([
+      "none",
+      "none",
+      "none",
+      "flex",
+      "none",
+      "none",
+      "none",
+      "none",
+    ]);
   };
   const handlePaymentChange = () => {
-    setMenuShow(["none", "none", "none", "none", "flex", "none", "none"]);
+    setMenuShow([
+      "none",
+      "none",
+      "none",
+      "none",
+      "flex",
+      "none",
+      "none",
+      "none",
+    ]);
   };
   const handleAdminSettingChange = () => {
-    setMenuShow(["none", "none", "none", "none", "none", "flex", "none"]);
+    setMenuShow([
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "flex",
+      "none",
+      "none",
+    ]);
   };
   const handleLogoutChange = () => {
     navigate("/");
-    setMenuShow(["none", "none", "none", "none", "none", "none", "flex"]);
+    setMenuShow([
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "flex",
+      "none",
+    ]);
   };
+  const handleVerificationChange = () => {
+    setMenuShow([
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "none",
+      "flex",
+    ]);
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -117,16 +196,24 @@ export default function Admin() {
               <ListItemIcon>
                 <LanguageIcon />
               </ListItemIcon>
-              <ListItemText
-                primary={"Language"}
-                onClick={handleLanguageChange}
-              />
+              <ListItemText primary={"Language"} />
             </ListItem>
-            <ListItem button key={"Payment"}>
+            <ListItem button key={"Payment"} onClick={handlePaymentChange}>
               <ListItemIcon>
                 <PaymentsIcon />
               </ListItemIcon>
-              <ListItemText primary={"Payment"} onClick={handlePaymentChange} />
+              <ListItemText primary={"Payment"} />
+            </ListItem>
+
+            <ListItem
+              button
+              key={"Verification"}
+              onClick={handleVerificationChange}
+            >
+              <ListItemIcon>
+                <FingerprintIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Verification"} />
             </ListItem>
           </List>
           <Divider />
@@ -233,6 +320,25 @@ export default function Admin() {
         </Typography>
         <Payment />
       </Grid>
+
+      <Grid
+        component="main"
+        justifyContent="center"
+        sx={{
+          flexGrow: 1,
+          mt: 5,
+          display: menuShow[7],
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Toolbar />
+        <Typography paragraph variant="h3">
+          VERIFICATION
+        </Typography>
+        <Verification />
+      </Grid>
+
       <Grid
         component="main"
         justifyContent="center"
